@@ -8,7 +8,7 @@
 unsigned char tape[65536];
 char src[1 << 20];
 size_t src_size, head;
-int balance;
+int balance, c;
 
 int main(int argc, char **argv)
 {
@@ -51,7 +51,9 @@ int main(int argc, char **argv)
 				putchar(tape[head]);
 				break;
 			case ',':
-				tape[head] = getchar();
+				if ((c = getchar()) != EOF) {
+					tape[head] = c;
+				}
 				break;
 			case '[':
 				if (tape[head] != 0) {

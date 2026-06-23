@@ -13,13 +13,13 @@ int balance, c;
 int main(int argc, char **argv)
 {
 	if (argc < 2) {
-		fprintf(stderr, "bf: no input file\n");
+		fprintf(stderr, "bfi: no input file\n");
 		return 2;
 	}
 
 	FILE *fp = fopen(argv[1], "r");
 	if (!fp) {
-		fprintf(stderr, "bf: open %s: %s\n", argv[1], strerror(errno));
+		fprintf(stderr, "bfi: open %s: %s\n", argv[1], strerror(errno));
 		return 1;
 	}
 	src_size = fread(src, 1, sizeof(src), fp);
@@ -29,14 +29,14 @@ int main(int argc, char **argv)
 		switch (src[i]) {
 			case '>':
 				if (head == sizeof(tape) - 1) {
-					fprintf(stderr, "bf: max tape size %zu exceeded\n", sizeof(tape));
+					fprintf(stderr, "bfi: max tape size %zu exceeded\n", sizeof(tape));
 					return 1;
 				}
 				++head;
 				break;
 			case '<':
 				if (head == 0) {
-					fprintf(stderr, "bf: tape pointer underflow\n");
+					fprintf(stderr, "bfi: tape pointer underflow\n");
 					return 1;
 				}
 				--head;
@@ -72,7 +72,7 @@ int main(int argc, char **argv)
 					}
 				}
 				if (i == src_size) {
-					fprintf(stderr, "bf: unmatched [\n");
+					fprintf(stderr, "bfi: unmatched [\n");
 					return 1;
 				}
 				break;
@@ -92,7 +92,7 @@ int main(int argc, char **argv)
 					}
 				}
 				if (i == 0) {
-					fprintf(stderr, "bf: unmatched ]\n");
+					fprintf(stderr, "bfi: unmatched ]\n");
 					return 1;
 				}
 				--i;
